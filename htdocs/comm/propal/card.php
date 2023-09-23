@@ -1831,7 +1831,7 @@ if ($action == 'create') {
 	print '<table class="border centpercent">';
 
 	// Reference
-	print '<tr class="field_ref"><td class="titlefieldcreate fieldrequired">'.$langs->trans('Ref').'</td><td class="valuefieldcreate">'.$langs->trans("Draft").'</td></tr>';
+	print '<tr class="field_ref"><td class="titlefieldcreate fieldrequired">'.$langs->trans('RefProposal').'</td><td class="valuefieldcreate">'.$langs->trans("Draft").'</td></tr>';
 
 	// Ref customer
 	print '<tr class="field_ref_client"><td class="titlefieldcreate">'.$langs->trans('RefCustomer').'</td><td class="valuefieldcreate">';

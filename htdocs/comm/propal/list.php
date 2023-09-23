@@ -211,7 +211,7 @@ if (empty($user->socid)) {
 
 $checkedtypetiers = 0;
 $arrayfields = array(
-	'p.ref'=>array('label'=>"Ref", 'checked'=>1),
+	'p.ref'=>array('label'=>"RefProposal", 'checked'=>1),
 	'p.ref_client'=>array('label'=>"RefCustomer", 'checked'=>-1),
 	'pr.ref'=>array('label'=>"ProjectRef", 'checked'=>1, 'enabled'=>(isModEnabled('project') ? 1 : 0)),
 	'pr.title'=>array('label'=>"ProjectLabel", 'checked'=>0, 'enabled'=>(isModEnabled('project') ? 1 : 0)),
