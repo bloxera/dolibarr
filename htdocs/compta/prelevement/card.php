@@ -325,9 +325,14 @@ if ($id > 0 || $ref) {
 		$modulepart = 'paymentbybanktransfer';
 	}
 
+	$filetype = '.xml';
+	if (getDolGlobalInt('WITHDRAWAL_CREATE_EXCEL') != 0) {
+		$filetype = '.csv';
+	}
+
 	if (isModEnabled('multicompany')) {
 		$labelentity = $conf->entity;
-		$relativepath = 'receipts/'.$object->ref.'-'.$labelentity.'.xml';
+		$relativepath = 'receipts/'.$object->ref.'-'.$labelentity.$filetype;
 
 		if ($type != 'bank-transfer') {
 			$dir = $conf->prelevement->dir_output;
@@ -335,10 +340,10 @@ if ($id > 0 || $ref) {
 			$dir = $conf->paymentbybanktransfer->dir_output;
 		}
 		if (!dol_is_file($dir.'/'.$relativepath)) {	// For backward compatibility
-			$relativepath = 'receipts/'.$object->ref.'.xml';
+			$relativepath = 'receipts/'.$object->ref.$filetype;
 		}
 	} else {
-		$relativepath = 'receipts/'.$object->ref.'.xml';
+		$relativepath = 'receipts/'.$object->ref.$filetype;
 	}
 
 	print '<a data-ajax="false" href="'.DOL_URL_ROOT.'/document.php?type=text/plain&amp;modulepart='.$modulepart.'&amp;file='.urlencode($relativepath).'">'.$relativepath;
