@@ -1892,12 +1892,19 @@ class BonPrelevement extends CommonObject
 							}
 							$cachearraytotestduplicate[$obj->idfac] = $obj->rowid;
 
-							$daterum = (!empty($obj->date_rum)) ? $this->db->jdate($obj->date_rum) : $this->db->jdate($obj->datec);
+
+							$dateTime = DateTime::createFromFormat('Y-m-d', $obj->datef);
+							$invoicedate = $dateTime->format('d.m.Y');
+
+							$dateTime = DateTime::createFromFormat('Y-m-d', $obj->date_rum);
+							$daterum = $dateTime->format('d.m.Y');
 
 							//$fileDebiteurSection .= $this->EnregDestinataireSEPA($obj->code, $obj->nom, $obj->address, $obj->zip, $obj->town, $obj->country_code, $obj->cb, $obj->cg, $obj->cc, $obj->somme, $obj->reffac, $obj->idfac, $obj->iban, $obj->bic, $daterum, $obj->drum, $obj->rum, $type);
 
 
-							$outarray = [' ', $obj->nom, ' ', ' ', ' ',  $obj->iban, $obj->bic.' ', ' ',  $obj->somme, 'Rechnung vom '.$obj->datef, ' Rechnung '.$obj->reffac, 'DE46500310001064699004', 'DIE KOOPERATIVE Verteilungsgesellschaft mbH', $obj->rum, $daterum, 'DE82ZZZ00002185843'];
+							$amount = number_format($obj->somme, 2, ',');
+
+							$outarray = [' ', $obj->nom, ' ', ' ', ' ',  $obj->iban, $obj->bic.' ', ' ',  $amount, 'Rechnung vom '.$invoicedate, ' Rechnung '.$obj->reffac, 'DE46500310001064699004', 'DIE KOOPERATIVE Verteilungsgesellschaft mbH', $obj->rum, $daterum, 'DE82ZZZ00002185843'];
 
 							// note: we cannot write out an empty cell this way, so it needs a trailing space
 							$out->write_title($outarray, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], $outputlangs, ['TextAuto','TextAuto', 'TextAuto', 'TextAuto', 'TextAuto', 'TextAuto', 'TextAuto', 'TextAuto', 'TextAuto', 'TextAuto', 'TextAuto', 'TextAuto', 'TextAuto']);
